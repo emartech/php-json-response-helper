@@ -1,0 +1,26 @@
+{
+  "name": "emartech/php-json-response-helper",
+  "description": "helper class to response proper api format",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "require": {
+    "php": "~7.1",
+    "symfony/http-foundation": "^3.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.0",
+    "emartech/php-test-helpers": "~0.2"
+  },
+  "autoload": {
+    "psr-4": {"Emartech\\Response\\": "src/"}
+  },
+  "authors": [
+    {
+      "name": "stvan",
+      "email": "sz.stvan@outlook.com"
+    }
+  ],
+  "scripts": {
+    "test": "vendor/bin/phpunit test/"
+  }
+}
