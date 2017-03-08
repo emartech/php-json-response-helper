@@ -7,46 +7,27 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ApiJson
 {
-    private $success = true;
-    private $errorMessage = '';
-    private $statusCode = 200;
-    private $data = [];
-
-
-    public function __construct(array $data = [])
+    public static function success(array $data = [])
     {
-        $this->setData($data);
+        return self::getResponse($data);
     }
 
-    public function setData(array $data)
+    public static function error(string $errorMessage = '', int $responseCode = 200)
     {
-        $this->success = true;
-        $this->data = $data;
+        return self::getResponse([], false, $errorMessage, $responseCode);
     }
 
-    public function setErrorMessage(string $errorMessage)
-    {
-        $this->success = false;
-        $this->data = [];
-        $this->errorMessage = $errorMessage;
-    }
-
-    public function getResponse(): JsonResponse
+    private static function getResponse(array $data = [], bool $success = true, string $errorMessage = '', int $statusCode = 200): JsonResponse
     {
         $ret = [
-            'success' => $this->success,
+            'success' => $success,
         ];
-        if ($this->success) {
-            $ret['data'] = $this->data;
+        if ($success) {
+            $ret['data'] = $data;
         } else {
-            $ret['errorMessage'] = $this->errorMessage;
+            $ret['errorMessage'] = $errorMessage;
         }
 
-        return new JsonResponse($ret, $this->statusCode);
-    }
-
-    public function setResponseCode(int $statusCode)
-    {
-        $this->statusCode = $statusCode;
+        return new JsonResponse($ret, $statusCode);
     }
 }
