@@ -33,3 +33,13 @@ test: phpunit
 
 phpunit:
 	$(DOCKER) exec $(CONTAINER) bash -c "cd /$(CONTAINER) && vendor/bin/phpunit -c test/phpunit.xml $(FILTERARGS) $(TESTFILE)"
+
+packages:
+	    $(DOCKER) exec -i -t $(CONTAINER) /bin/bash -l -c "cd /$(CONTAINER) && composer install 2>&1"
+
+pu: packages-update
+	packages-update:
+	$(DOCKER) exec -i -t $(CONTAINER) /bin/bash -l -c "cd /$(CONTAINER) && composer update 2>&1"
+
+logs:
+	$(DOCKER) logs --follow $(CONTAINER)
