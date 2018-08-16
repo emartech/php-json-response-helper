@@ -2,7 +2,7 @@
   "name": "emartech/php-json-response-helper",
   "description": "helper class to response proper api format",
   "minimum-stability": "stable",
-  "license": "proprietary",
+  "license": "MIT",
   "require": {
     "php": "~7.1",
     "symfony/http-foundation": "^3.2"
